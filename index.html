@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#101116">
+<meta name="description" content="A private, simple dark-mode notes app.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<title>Quick Notes</title>
+<style>
+:root{color-scheme:dark;--bg:#101116;--panel:#191b24;--panel2:#222531;--line:#303341;--text:#f4f2fa;--muted:#a4a3b3;--accent:#b8a2ff;--danger:#ff8585}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px system-ui,-apple-system,Segoe UI,sans-serif}
+button,input,textarea,select{font:inherit}button{cursor:pointer}
+.app{max-width:850px;margin:auto;min-height:100dvh;padding:env(safe-area-inset-top) 16px calc(24px + env(safe-area-inset-bottom))}
+header{display:flex;align-items:center;justify-content:space-between;padding:20px 0 16px;gap:12px}
+.brand{display:flex;gap:11px;align-items:center}.logo{width:42px;height:42px;border-radius:14px;background:#29243a;display:grid;place-items:center;color:var(--accent);font-size:22px}
+h1{font-size:21px;margin:0}.sub{font-size:12px;color:var(--muted);margin-top:2px}
+.count{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:7px 10px;border-radius:20px}
+.search{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:13px 14px;color:var(--text);outline:none;margin-bottom:13px}
+.search:focus,input:focus,textarea:focus,select:focus{border-color:var(--accent)}
+.filters{display:flex;gap:8px;overflow:auto;padding:0 0 14px;scrollbar-width:none}.filters button{white-space:nowrap;background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:8px 12px;font-size:13px}
+.filters button.active{background:#302a43;border-color:#7662a8;color:#eee8ff}
+.primary{background:var(--accent);color:#171321;border:0;border-radius:12px;padding:12px 15px;font-weight:650}
+.new{width:100%;display:flex;justify-content:center;align-items:center;gap:8px;margin-bottom:18px}
+.layout{display:grid;grid-template-columns:minmax(0, .9fr) minmax(0,1.3fr);gap:14px}
+.section-title{font-size:13px;color:var(--muted);margin:0 0 9px;font-weight:600}
+.notes{display:flex;flex-direction:column;gap:8px}
+.note{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:12px;text-align:left;color:var(--text);width:100%}
+.note.active{border-color:#8873bd;background:#242131}
+.note strong{display:block;font-size:14px;overflow-wrap:anywhere}.note small{display:block;color:var(--muted);margin-top:5px;font-size:11px}
+.preview{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:15px;min-height:250px}
+.preview h2{font-size:19px;margin:0 0 5px;overflow-wrap:anywhere}.meta{color:var(--muted);font-size:11px;margin-bottom:15px}
+.body{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.6;font-size:14px;color:#e5e2ed;min-height:120px}
+.actions{display:flex;gap:8px;margin-top:18px}.secondary,.delete{border:1px solid var(--line);border-radius:10px;padding:9px 12px;background:var(--panel2);color:var(--text);font-size:13px}.delete{color:var(--danger);margin-left:auto}
+.empty{color:var(--muted);font-size:13px;text-align:center;padding:24px 8px}
+.editor{display:none;background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:14px;margin-bottom:16px}
+.editor.show{display:block}.field{width:100%;background:#11131a;border:1px solid var(--line);border-radius:10px;color:var(--text);padding:11px;margin:7px 0;outline:none}
+textarea.field{resize:vertical;min-height:180px;line-height:1.5}
+.editor-actions{display:flex;gap:8px;margin-top:8px}.editor-actions button{flex:1}
+footer{color:#777887;font-size:11px;text-align:center;margin:20px 0 5px}
+@media(max-width:620px){.layout{grid-template-columns:1fr}.preview{min-height:210px}.notes{display:grid;grid-template-columns:1fr 1fr}.note{min-width:0}.app{padding-left:13px;padding-right:13px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="brand"><div class="logo">✎</div><div><h1>Quick Notes</h1><div class="sub">Your thoughts, in one place.</div></div></div><div class="count" id="count">0 notes</div></header>
+<input class="search" id="search" placeholder="⌕  Search your notes…" autocomplete="off">
+<nav class="filters" id="filters"></nav>
+<button class="primary new" id="newBtn">＋ Create a note</button>
+<section class="editor" id="editor">
+  <h3 id="editorHeading" style="margin:2px 0 8px;font-size:15px">New note</h3>
+  <input class="field" id="title" placeholder="Note title" maxlength="100">
+  <select class="field" id="category">
+    <option>Personal</option><option>Trading</option><option>Studies</option><option>Goals</option><option>Ideas</option><option>Other</option>
+  </select>
+  <textarea class="field" id="content" placeholder="Start writing…"></textarea>
+  <div class="editor-actions"><button class="primary" id="saveBtn">Save note</button><button class="secondary" id="cancelBtn">Cancel</button></div>
+</section>
+<div class="layout">
+  <section><h3 class="section-title">YOUR NOTES</h3><div class="notes" id="notes"></div></section>
+  <section><h3 class="section-title">NOTE VIEW</h3><div class="preview" id="preview"><div class="empty">Choose a note to read it, or create your first one.</div></div></section>
+</div>
+<footer>Saved on this device · No account required</footer>
+</div>
+<script>
+const CATS=['All','Personal','Trading','Studies','Goals','Ideas','Other'];
+const KEY='quick-notes-v1';
+let notes=[];let selected=null;let editing=null;let filter='All';
+const $=id=>document.getElementById(id);
+function load(){try{notes=JSON.parse(localStorage.getItem(KEY)||'[]')}catch{notes=[]}if(!notes.length){const n={id:crypto.randomUUID(),title:'Welcome to Quick Notes',category:'Personal',body:'This is your private notes space.\\n\\nCreate a note, choose a category, and keep your thoughts organized.',updated:Date.now()};notes=[n];save();selected=n.id}}
+function save(){localStorage.setItem(KEY,JSON.stringify(notes));render()}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function render(){
+ $('count').textContent=notes.length+' '+(notes.length===1?'note':'notes');
+ $('filters').innerHTML=CATS.map(c=>`<button class="${filter===c?'active':''}" data-cat="${c}">${c}</button>`).join('');
+ $('filters').querySelectorAll('button').forEach(b=>b.onclick=()=>{filter=b.dataset.cat;render()});
+ const q=$('search').value.toLowerCase();
+ const shown=notes.filter(n=>(filter==='All'||n.category===filter)&&(n.title+' '+n.body+' '+n.category).toLowerCase().includes(q)).sort((a,b)=>b.updated-a.updated);
+ $('notes').innerHTML=shown.length?shown.map(n=>`<button class="note ${selected===n.id?'active':''}" data-id="${n.id}"><strong>${esc(n.title||'Untitled')}</strong><small>${esc(n.category)} · ${new Date(n.updated).toLocaleDateString()}</small></button>`).join(''):'<div class="empty">No notes found.</div>';
+ $('notes').querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>{selected=b.dataset.id;closeEditor();render()});
+ const n=notes.find(x=>x.id===selected);
+ if(!n){$('preview').innerHTML='<div class="empty">Choose a note to read it, or create your first one.</div>';return}
+ $('preview').innerHTML=`<h2>${esc(n.title||'Untitled')}</h2><div class="meta">${esc(n.category)} · Updated ${new Date(n.updated).toLocaleString()}</div><div class="body">${esc(n.body||'This note is empty.')}</div><div class="actions"><button class="secondary" id="editBtn">✎ Edit</button><button class="delete" id="deleteBtn">Delete</button></div>`;
+ $('editBtn').onclick=()=>openEditor(n);$('deleteBtn').onclick=()=>{if(confirm('Delete this note? This cannot be undone.')){notes=notes.filter(x=>x.id!==n.id);selected=notes[0]?.id||null;save()}};
+}
+function openEditor(n=null){editing=n?.id||null;$('editorHeading').textContent=n?'Edit note':'New note';$('title').value=n?.title||'';$('category').value=n?.category|| (filter!=='All'?filter:'Personal');$('content').value=n?.body||'';$('editor').classList.add('show');$('title').focus();$('editor').scrollIntoView({behavior:'smooth',block:'nearest'})}
+function closeEditor(){$('editor').classList.remove('show');editing=null}
+$('newBtn').onclick=()=>openEditor();$('cancelBtn').onclick=closeEditor;$('search').addEventListener('input',render);
+$('saveBtn').onclick=()=>{const title=$('title').value.trim();if(!title){$('title').focus();$('title').placeholder='Please enter a title';return}
+ const data={title,category:$('category').value,body:$('content').value,updated:Date.now()};
+ if(editing){notes=notes.map(n=>n.id===editing?{...n,...data}:n);selected=editing}
+ else{const n={id:crypto.randomUUID(),...data};notes.unshift(n);selected=n.id}
+ closeEditor();save()};
+load();render();
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+</script>
+</body></html>
