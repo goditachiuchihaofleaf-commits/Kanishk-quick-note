@@ -3,96 +3,91 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#101116">
-<meta name="description" content="A private, simple dark-mode notes app.">
+<meta name="theme-color" content="#101114">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icon-192.png">
-<title>Quick Notes</title>
+<title>Quick Notes+</title>
 <style>
-:root{color-scheme:dark;--bg:#101116;--panel:#191b24;--panel2:#222531;--line:#303341;--text:#f4f2fa;--muted:#a4a3b3;--accent:#b8a2ff;--danger:#ff8585}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px system-ui,-apple-system,Segoe UI,sans-serif}
-button,input,textarea,select{font:inherit}button{cursor:pointer}
-.app{max-width:850px;margin:auto;min-height:100dvh;padding:env(safe-area-inset-top) 16px calc(24px + env(safe-area-inset-bottom))}
-header{display:flex;align-items:center;justify-content:space-between;padding:20px 0 16px;gap:12px}
-.brand{display:flex;gap:11px;align-items:center}.logo{width:42px;height:42px;border-radius:14px;background:#29243a;display:grid;place-items:center;color:var(--accent);font-size:22px}
-h1{font-size:21px;margin:0}.sub{font-size:12px;color:var(--muted);margin-top:2px}
-.count{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:7px 10px;border-radius:20px}
-.search{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:13px 14px;color:var(--text);outline:none;margin-bottom:13px}
-.search:focus,input:focus,textarea:focus,select:focus{border-color:var(--accent)}
-.filters{display:flex;gap:8px;overflow:auto;padding:0 0 14px;scrollbar-width:none}.filters button{white-space:nowrap;background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:8px 12px;font-size:13px}
-.filters button.active{background:#302a43;border-color:#7662a8;color:#eee8ff}
-.primary{background:var(--accent);color:#171321;border:0;border-radius:12px;padding:12px 15px;font-weight:650}
-.new{width:100%;display:flex;justify-content:center;align-items:center;gap:8px;margin-bottom:18px}
-.layout{display:grid;grid-template-columns:minmax(0, .9fr) minmax(0,1.3fr);gap:14px}
-.section-title{font-size:13px;color:var(--muted);margin:0 0 9px;font-weight:600}
-.notes{display:flex;flex-direction:column;gap:8px}
-.note{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:12px;text-align:left;color:var(--text);width:100%}
-.note.active{border-color:#8873bd;background:#242131}
-.note strong{display:block;font-size:14px;overflow-wrap:anywhere}.note small{display:block;color:var(--muted);margin-top:5px;font-size:11px}
-.preview{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:15px;min-height:250px}
-.preview h2{font-size:19px;margin:0 0 5px;overflow-wrap:anywhere}.meta{color:var(--muted);font-size:11px;margin-bottom:15px}
-.body{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.6;font-size:14px;color:#e5e2ed;min-height:120px}
-.actions{display:flex;gap:8px;margin-top:18px}.secondary,.delete{border:1px solid var(--line);border-radius:10px;padding:9px 12px;background:var(--panel2);color:var(--text);font-size:13px}.delete{color:var(--danger);margin-left:auto}
-.empty{color:var(--muted);font-size:13px;text-align:center;padding:24px 8px}
-.editor{display:none;background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:14px;margin-bottom:16px}
-.editor.show{display:block}.field{width:100%;background:#11131a;border:1px solid var(--line);border-radius:10px;color:var(--text);padding:11px;margin:7px 0;outline:none}
-textarea.field{resize:vertical;min-height:180px;line-height:1.5}
-.editor-actions{display:flex;gap:8px;margin-top:8px}.editor-actions button{flex:1}
-footer{color:#777887;font-size:11px;text-align:center;margin:20px 0 5px}
-@media(max-width:620px){.layout{grid-template-columns:1fr}.preview{min-height:210px}.notes{display:grid;grid-template-columns:1fr 1fr}.note{min-width:0}.app{padding-left:13px;padding-right:13px}}
+:root{color-scheme:dark;--bg:#0c0d10;--panel:#15171c;--panel2:#1c1f26;--line:#292d36;--muted:#969eac;--text:#f4f5f7;--accent:#a78bfa;--accent2:#7c5ce7;--green:#5bd6a0;--red:#ff7b87}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 85% -10%,#292044 0,transparent 32%),var(--bg);color:var(--text);font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}
+button,input,textarea,select{font:inherit}button{cursor:pointer;color:inherit;border:0}.app{max-width:760px;margin:auto;padding:env(safe-area-inset-top) 16px calc(90px + env(safe-area-inset-bottom))}
+header{display:flex;justify-content:space-between;align-items:center;padding:22px 2px 16px}.brand{font-size:22px;font-weight:800;letter-spacing:-.7px}.brand span{color:var(--accent)}.sub{color:var(--muted);font-size:12px}.iconbtn,.btn{background:var(--panel2);border:1px solid var(--line);border-radius:13px;padding:10px 13px}.primary{background:linear-gradient(135deg,var(--accent2),#9b7af5);border:0;color:white;font-weight:700}.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;background:#111318;padding:6px;border:1px solid var(--line);border-radius:16px;position:sticky;top:0;z-index:4}
+.tab{padding:10px 3px;border-radius:11px;background:transparent;color:var(--muted);font-size:13px}.tab.active{background:#292238;color:#e9ddff}
+h1{font-size:25px;letter-spacing:-.7px;margin:22px 0 3px}h2{font-size:17px;margin:0 0 12px}.muted{color:var(--muted)}.small{font-size:12px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:16px 0}.stat,.card{background:linear-gradient(145deg,var(--panel),#13151a);border:1px solid var(--line);border-radius:18px;padding:15px}.stat strong{display:block;font-size:25px;margin-top:4px}.stat .small{font-size:11px}
+.section{margin:23px 0}.sectionhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px}.progress{height:8px;background:#2a2d35;border-radius:20px;overflow:hidden;margin:10px 0 5px}.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--accent2),#c4a8ff);border-radius:20px;transition:width .2s}
+.row{display:flex;align-items:center;gap:10px}.between{display:flex;align-items:center;justify-content:space-between;gap:10px}.list{display:grid;gap:9px}.item{display:flex;align-items:flex-start;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px}.item.done .itemtext{text-decoration:line-through;color:var(--muted)}.check{appearance:none;width:21px;height:21px;flex:0 0 21px;border:1.5px solid #646b78;border-radius:7px;margin:1px 0 0;background:transparent}.check:checked{background:var(--green);border-color:var(--green)}.check:checked:after{content:'✓';display:block;text-align:center;color:#07150f;font-weight:900;line-height:18px}.itemtext{flex:1;min-width:0;overflow-wrap:anywhere}.tag{font-size:11px;color:#d8c9ff;background:#302646;padding:4px 8px;border-radius:20px}.search,input,textarea,select{width:100%;background:#101217;border:1px solid var(--line);border-radius:12px;padding:12px;color:var(--text);outline:none}textarea{min-height:150px;resize:vertical}.search{margin:14px 0}.actions{display:flex;gap:8px;flex-wrap:wrap}.notegrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.notecard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:13px;min-height:130px;display:flex;flex-direction:column;gap:8px}.notecard h3{font-size:14px;margin:0}.notecard p{font-size:12px;color:var(--muted);margin:0;white-space:pre-wrap;overflow:hidden;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical}.badge{font-size:10px;color:var(--muted)}.fab{position:fixed;right:max(20px,calc((100vw - 760px)/2 + 20px));bottom:calc(20px + env(safe-area-inset-bottom));width:58px;height:58px;border-radius:19px;background:linear-gradient(135deg,var(--accent2),#a98afa);font-size:28px;box-shadow:0 12px 35px #0009;z-index:5}
+.hidden{display:none!important}.modal{position:fixed;inset:0;background:#000a;z-index:10;display:flex;align-items:flex-end;justify-content:center;padding:12px}.sheet{width:min(100%,700px);max-height:92dvh;overflow:auto;background:#171920;border:1px solid #343845;border-radius:22px;padding:18px}.sheet label{display:block;font-size:12px;color:var(--muted);margin:12px 0 6px}.sheet .actions{margin-top:14px}.habitrow{display:grid;grid-template-columns:1fr repeat(7,28px);gap:5px;align-items:center}.daydot{width:27px;height:27px;border-radius:9px;background:#292d35;color:#9ba2ae;font-size:11px}.daydot.on{background:#276e55;color:#d9ffed}.daylabels{font-size:10px;color:var(--muted);text-align:center}.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:16px}
+@media(min-width:600px){.app{padding-left:24px;padding-right:24px}.grid{grid-template-columns:repeat(4,1fr)}}
 </style>
 </head>
 <body>
 <div class="app">
-<header><div class="brand"><div class="logo">✎</div><div><h1>Quick Notes</h1><div class="sub">Your thoughts, in one place.</div></div></div><div class="count" id="count">0 notes</div></header>
-<input class="search" id="search" placeholder="⌕  Search your notes…" autocomplete="off">
-<nav class="filters" id="filters"></nav>
-<button class="primary new" id="newBtn">＋ Create a note</button>
-<section class="editor" id="editor">
-  <h3 id="editorHeading" style="margin:2px 0 8px;font-size:15px">New note</h3>
-  <input class="field" id="title" placeholder="Note title" maxlength="100">
-  <select class="field" id="category">
-    <option>Personal</option><option>Trading</option><option>Studies</option><option>Goals</option><option>Ideas</option><option>Other</option>
-  </select>
-  <textarea class="field" id="content" placeholder="Start writing…"></textarea>
-  <div class="editor-actions"><button class="primary" id="saveBtn">Save note</button><button class="secondary" id="cancelBtn">Cancel</button></div>
+<header><div><div class="brand">Quick Notes<span>+</span></div><div class="sub">Your personal productivity space</div></div><button class="iconbtn" id="themeInfo" aria-label="About">☾</button></header>
+<nav class="tabs">
+<button class="tab active" data-page="home">⌂ Home</button><button class="tab" data-page="notes">▤ Notes</button><button class="tab" data-page="goals">✓ Goals</button><button class="tab" data-page="habits">◷ Habits</button>
+</nav>
+<main>
+<section id="home" class="page">
+<h1>Good to see you.</h1><div class="muted" id="todayLabel"></div>
+<div class="grid">
+<div class="stat"><div class="small">Today's goals</div><strong id="homeGoalPct">0%</strong><div class="progress"><i id="homeGoalBar" style="width:0%"></i></div><div class="small" id="homeGoalCount">0 of 0 completed</div></div>
+<div class="stat"><div class="small">Today's habits</div><strong id="homeHabitPct">0%</strong><div class="progress"><i id="homeHabitBar" style="width:0%"></i></div><div class="small" id="homeHabitCount">0 of 0 completed</div></div>
+</div>
+<div class="section"><div class="sectionhead"><h2>Today's priorities</h2><button class="btn" data-go="goals">View all</button></div><div id="homeGoals" class="list"></div></div>
+<div class="section"><div class="sectionhead"><h2>Habit check-in</h2><button class="btn" data-go="habits">Track habits</button></div><div id="homeHabits" class="list"></div></div>
+<div class="section"><div class="sectionhead"><h2>Recently edited notes</h2><button class="btn" data-go="notes">All notes</button></div><div id="recentNotes" class="notegrid"></div></div>
 </section>
-<div class="layout">
-  <section><h3 class="section-title">YOUR NOTES</h3><div class="notes" id="notes"></div></section>
-  <section><h3 class="section-title">NOTE VIEW</h3><div class="preview" id="preview"><div class="empty">Choose a note to read it, or create your first one.</div></div></section>
+<section id="notes" class="page hidden"><h1>Your notes</h1><div class="muted">Capture ideas, plans and reflections.</div><input class="search" id="noteSearch" placeholder="Search notes…"><div class="actions"><select id="noteFilter" style="max-width:170px"><option value="all">All categories</option><option>Personal</option><option>Trading</option><option>Studies</option><option>Goals</option><option>Ideas</option><option>Other</option></select><select id="noteSort" style="max-width:160px"><option value="recent">Recently edited</option><option value="pinned">Pinned first</option><option value="az">Title A–Z</option></select></div><div class="section"><div id="notesList" class="notegrid"></div></div></section>
+<section id="goals" class="page hidden"><h1>Daily goals</h1><div class="muted">Small actions. Visible progress. Consistent execution.</div><div class="card section"><div class="between"><div><div class="small">Completion today</div><strong id="goalPct" style="font-size:32px">0%</strong></div><div class="tag" id="goalCount">0 / 0 done</div></div><div class="progress"><i id="goalBar" style="width:0%"></i></div></div><div class="actions"><input id="goalInput" placeholder="Add a goal for today…" style="flex:1;min-width:180px"><button class="btn primary" id="addGoal">Add goal</button></div><div class="section"><div class="sectionhead"><h2>Today's checklist</h2><button class="btn" id="clearGoals">Clear completed</button></div><div id="goalsList" class="list"></div></div></section>
+<section id="habits" class="page hidden"><h1>Habit tracker</h1><div class="muted">Build consistency one day at a time.</div><div class="card section"><div class="between"><div><div class="small">Today's habit score</div><strong id="habitPct" style="font-size:32px">0%</strong></div><div class="tag" id="habitCount">0 / 0 done</div></div><div class="progress"><i id="habitBar" style="width:0%"></i></div></div><div class="actions"><input id="habitInput" placeholder="Add a habit (e.g. Read 20 minutes)" style="flex:1;min-width:180px"><button class="btn primary" id="addHabit">Add habit</button></div><div class="section"><div class="sectionhead"><h2>Your habits · last 7 days</h2></div><div id="habitList" class="list"></div></div><div class="small">Tap a day to mark a habit complete. Today's column is the rightmost one.</div></section>
+</main>
 </div>
-<footer>Saved on this device · No account required</footer>
-</div>
+<button class="fab" id="fab" aria-label="Add">＋</button>
+<div id="modal" class="modal hidden"><div class="sheet"><div class="between"><h2 id="modalTitle">New note</h2><button class="iconbtn" id="closeModal">✕</button></div><label>Title</label><input id="editTitle" placeholder="Give your note a title"><label>Note</label><textarea id="editBody" placeholder="Start writing…"></textarea><div class="row"><div style="flex:1"><label>Category</label><select id="editCategory"><option>Personal</option><option>Trading</option><option>Studies</option><option>Goals</option><option>Ideas</option><option>Other</option></select></div><div style="flex:1"><label>Tags</label><input id="editTags" placeholder="work, plan"></div></div><div class="actions"><button class="btn" id="pinNote">☆ Pin</button><button class="btn" id="favNote">♡ Favourite</button></div><div class="actions"><button class="btn primary" id="saveNote" style="flex:1">Save note</button><button class="btn" id="deleteNote">Delete</button></div></div></div>
 <script>
-const CATS=['All','Personal','Trading','Studies','Goals','Ideas','Other'];
-const KEY='quick-notes-v1';
-let notes=[];let selected=null;let editing=null;let filter='All';
-const $=id=>document.getElementById(id);
-function load(){try{notes=JSON.parse(localStorage.getItem(KEY)||'[]')}catch{notes=[]}if(!notes.length){const n={id:crypto.randomUUID(),title:'Welcome to Quick Notes',category:'Personal',body:'This is your private notes space.\\n\\nCreate a note, choose a category, and keep your thoughts organized.',updated:Date.now()};notes=[n];save();selected=n.id}}
-function save(){localStorage.setItem(KEY,JSON.stringify(notes));render()}
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+const $=id=>document.getElementById(id), today=()=>new Date().toLocaleDateString('en-CA');
+const dayKey=(d)=>{let x=new Date();x.setDate(x.getDate()-d);return x.toLocaleDateString('en-CA')};
+let state=JSON.parse(localStorage.getItem('quicknotes_plus_v1')||'null')||{notes:[],goals:[],habits:[]};
+let editing=null, flags={pin:false,fav:false};
+function save(){localStorage.setItem('quicknotes_plus_v1',JSON.stringify(state));render()}
+function pct(done,total){return total?Math.round(done/total*100):0}
+function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function go(page){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('hidden',p.id!==page));document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.page===page));$('fab').classList.toggle('hidden',page==='goals'||page==='habits');}
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>go(t.dataset.page));document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
+function goalStats(){let a=state.goals.filter(g=>g.date===today());return [a.filter(g=>g.done).length,a.length]}
+function habitStats(){let a=state.habits;return [a.filter(h=>(h.days||[]).includes(today())).length,a.length]}
+function progress(done,total,ids){let p=pct(done,total);$(ids[0]).textContent=p+'%';$(ids[1]).style.width=p+'%';$(ids[2]).textContent=done+' of '+total+' completed'}
+function goalRow(g){return `<div class="item ${g.done?'done':''}"><input class="check" type="checkbox" data-goal="${g.id}" ${g.done?'checked':''}><div class="itemtext">${esc(g.text)}</div><button class="iconbtn" data-delgoal="${g.id}">×</button></div>`}
+function habitRow(h){let days=Array.from({length:7},(_,i)=>dayKey(6-i));let streak=0;for(let i=0;i<365;i++){if((h.days||[]).includes(dayKey(i)))streak++;else break}return `<div class="card"><div class="between"><strong>${esc(h.name)}</strong><span class="tag">🔥 ${streak} day streak</span></div><div class="habitrow" style="margin-top:12px"><span class="small">This week</span>${days.map((d,i)=>`<span class="daylabels">${['S','M','T','W','T','F','S'][new Date(d+'T12:00:00').getDay()]}</span>`).join('')}<span class="small"> </span>${days.map(d=>`<button class="daydot ${(h.days||[]).includes(d)?'on':''}" data-habit="${h.id}" data-day="${d}" aria-label="${d}">${(h.days||[]).includes(d)?'✓':'·'}</button>`).join('')}<span class="small"></span><span class="small" style="grid-column:span 7;text-align:right"><button class="btn" data-delhabit="${h.id}">Remove habit</button></span></div></div>`}
+function noteCard(n){return `<article class="notecard" data-open="${n.id}"><div class="between"><span class="badge">${esc(n.category)}</span><span class="badge">${n.pinned?'📌 ':''}${n.fav?'♥':''}</span></div><h3>${esc(n.title||'Untitled')}</h3><p>${esc(n.body||'No content')}</p><div class="badge">${new Date(n.updated).toLocaleDateString()}</div></article>`}
 function render(){
- $('count').textContent=notes.length+' '+(notes.length===1?'note':'notes');
- $('filters').innerHTML=CATS.map(c=>`<button class="${filter===c?'active':''}" data-cat="${c}">${c}</button>`).join('');
- $('filters').querySelectorAll('button').forEach(b=>b.onclick=()=>{filter=b.dataset.cat;render()});
- const q=$('search').value.toLowerCase();
- const shown=notes.filter(n=>(filter==='All'||n.category===filter)&&(n.title+' '+n.body+' '+n.category).toLowerCase().includes(q)).sort((a,b)=>b.updated-a.updated);
- $('notes').innerHTML=shown.length?shown.map(n=>`<button class="note ${selected===n.id?'active':''}" data-id="${n.id}"><strong>${esc(n.title||'Untitled')}</strong><small>${esc(n.category)} · ${new Date(n.updated).toLocaleDateString()}</small></button>`).join(''):'<div class="empty">No notes found.</div>';
- $('notes').querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>{selected=b.dataset.id;closeEditor();render()});
- const n=notes.find(x=>x.id===selected);
- if(!n){$('preview').innerHTML='<div class="empty">Choose a note to read it, or create your first one.</div>';return}
- $('preview').innerHTML=`<h2>${esc(n.title||'Untitled')}</h2><div class="meta">${esc(n.category)} · Updated ${new Date(n.updated).toLocaleString()}</div><div class="body">${esc(n.body||'This note is empty.')}</div><div class="actions"><button class="secondary" id="editBtn">✎ Edit</button><button class="delete" id="deleteBtn">Delete</button></div>`;
- $('editBtn').onclick=()=>openEditor(n);$('deleteBtn').onclick=()=>{if(confirm('Delete this note? This cannot be undone.')){notes=notes.filter(x=>x.id!==n.id);selected=notes[0]?.id||null;save()}};
+let [gd,gt]=goalStats(),[hd,ht]=habitStats();progress(gd,gt,['homeGoalPct','homeGoalBar','homeGoalCount']);progress(hd,ht,['homeHabitPct','homeHabitBar','homeHabitCount']);
+$('goalPct').textContent=pct(gd,gt)+'%';$('goalBar').style.width=pct(gd,gt)+'%';$('goalCount').textContent=gd+' / '+gt+' done';
+$('habitPct').textContent=pct(hd,ht)+'%';$('habitBar').style.width=pct(hd,ht)+'%';$('habitCount').textContent=hd+' / '+ht+' done';
+let todayGoals=state.goals.filter(g=>g.date===today());$('homeGoals').innerHTML=todayGoals.length?todayGoals.slice(0,4).map(goalRow).join(''):'<div class="empty">No goals added yet. Add your first priority.</div>';$('goalsList').innerHTML=todayGoals.length?todayGoals.map(goalRow).join(''):'<div class="empty">Your checklist is clear. Add a goal above.</div>';
+$('homeHabits').innerHTML=state.habits.length?state.habits.slice(0,4).map(h=>`<div class="item"><input class="check" type="checkbox" data-habit="${h.id}" data-day="${today()}" ${(h.days||[]).includes(today())?'checked':''}><div class="itemtext">${esc(h.name)}</div></div>`).join(''):'<div class="empty">Add habits you want to build.</div>';
+$('habitList').innerHTML=state.habits.length?state.habits.map(habitRow).join(''):'<div class="empty">No habits yet. Start with one small habit.</div>';
+let q=$('noteSearch').value.toLowerCase(),cat=$('noteFilter').value,sort=$('noteSort').value;
+let ns=state.notes.filter(n=>(cat==='all'||n.category===cat)&&(`${n.title} ${n.body} ${n.tags}`.toLowerCase().includes(q)));
+ns.sort((a,b)=>sort==='az'?a.title.localeCompare(b.title):sort==='pinned'?(b.pinned-a.pinned||b.updated-a.updated):b.updated-a.updated);
+$('notesList').innerHTML=ns.length?ns.map(noteCard).join(''):'<div class="empty" style="grid-column:1/-1">No notes found. Tap + to create one.</div>';
+$('recentNotes').innerHTML=state.notes.length?state.notes.slice().sort((a,b)=>b.updated-a.updated).slice(0,4).map(noteCard).join(''):'<div class="empty" style="grid-column:1/-1">Your notes will appear here.</div>';
+document.querySelectorAll('[data-goal]').forEach(c=>c.onchange=()=>{let g=state.goals.find(x=>x.id===c.dataset.goal);if(g)g.done=c.checked;save()});
+document.querySelectorAll('[data-delgoal]').forEach(b=>b.onclick=()=>{state.goals=state.goals.filter(x=>x.id!==b.dataset.delgoal);save()});
+document.querySelectorAll('[data-habit]').forEach(b=>b.onchange|| (b.onclick=()=>{let h=state.habits.find(x=>x.id===b.dataset.habit);if(!h)return;h.days=h.days||[];let d=b.dataset.day||today();h.days=h.days.includes(d)?h.days.filter(x=>x!==d):[...h.days,d];save()}));
+document.querySelectorAll('[data-delhabit]').forEach(b=>b.onclick=()=>{state.habits=state.habits.filter(x=>x.id!==b.dataset.delhabit);save()});
+document.querySelectorAll('[data-open]').forEach(c=>c.onclick=()=>openNote(c.dataset.open));
+$('todayLabel').textContent=new Date().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric',year:'numeric'});
 }
-function openEditor(n=null){editing=n?.id||null;$('editorHeading').textContent=n?'Edit note':'New note';$('title').value=n?.title||'';$('category').value=n?.category|| (filter!=='All'?filter:'Personal');$('content').value=n?.body||'';$('editor').classList.add('show');$('title').focus();$('editor').scrollIntoView({behavior:'smooth',block:'nearest'})}
-function closeEditor(){$('editor').classList.remove('show');editing=null}
-$('newBtn').onclick=()=>openEditor();$('cancelBtn').onclick=closeEditor;$('search').addEventListener('input',render);
-$('saveBtn').onclick=()=>{const title=$('title').value.trim();if(!title){$('title').focus();$('title').placeholder='Please enter a title';return}
- const data={title,category:$('category').value,body:$('content').value,updated:Date.now()};
- if(editing){notes=notes.map(n=>n.id===editing?{...n,...data}:n);selected=editing}
- else{const n={id:crypto.randomUUID(),...data};notes.unshift(n);selected=n.id}
- closeEditor();save()};
-load();render();
-if('serviceWorker' in navigator && location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+function openNote(id=null){editing=id;let n=state.notes.find(x=>x.id===id);flags={pin:!!n?.pinned,fav:!!n?.fav};$('modalTitle').textContent=n?'Edit note':'New note';$('editTitle').value=n?.title||'';$('editBody').value=n?.body||'';$('editCategory').value=n?.category||'Personal';$('editTags').value=n?.tags||'';$('pinNote').textContent=flags.pin?'📌 Pinned':'☆ Pin';$('favNote').textContent=flags.fav?'♥ Favourited':'♡ Favourite';$('deleteNote').style.display=n?'':'none';$('modal').classList.remove('hidden')}
+$('fab').onclick=()=>openNote();$('closeModal').onclick=()=>$('modal').classList.add('hidden');$('pinNote').onclick=()=>{flags.pin=!flags.pin;$('pinNote').textContent=flags.pin?'📌 Pinned':'☆ Pin'};$('favNote').onclick=()=>{flags.fav=!flags.fav;$('favNote').textContent=flags.fav?'♥ Favourited':'♡ Favourite'};
+$('saveNote').onclick=()=>{let n=state.notes.find(x=>x.id===editing);if(!n){n={id:crypto.randomUUID(),created:Date.now()};state.notes.push(n)}Object.assign(n,{title:$('editTitle').value.trim()||'Untitled',body:$('editBody').value,category:$('editCategory').value,tags:$('editTags').value,pinned:flags.pin,fav:flags.fav,updated:Date.now()});$('modal').classList.add('hidden');save()};
+$('deleteNote').onclick=()=>{if(editing&&confirm('Delete this note?')){state.notes=state.notes.filter(n=>n.id!==editing);$('modal').classList.add('hidden');save()}};
+$('addGoal').onclick=()=>{let v=$('goalInput').value.trim();if(!v)return;state.goals.push({id:crypto.randomUUID(),text:v,date:today(),done:false});$('goalInput').value='';save()};$('goalInput').onkeydown=e=>{if(e.key==='Enter')$('addGoal').click()};$('clearGoals').onclick=()=>{state.goals=state.goals.filter(g=>g.date!==today()||!g.done);save()};
+$('addHabit').onclick=()=>{let v=$('habitInput').value.trim();if(!v)return;state.habits.push({id:crypto.randomUUID(),name:v,days:[]});$('habitInput').value='';save()};$('habitInput').onkeydown=e=>{if(e.key==='Enter')$('addHabit').click()};
+$('noteSearch').oninput=render;$('noteFilter').onchange=render;$('noteSort').onchange=render;
+$('themeInfo').onclick=()=>alert('Quick Notes+ uses a dark theme. Your notes, goals and habit check-ins are saved on this device.');
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+render();
 </script>
 </body></html>
